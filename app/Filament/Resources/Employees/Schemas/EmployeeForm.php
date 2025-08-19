@@ -3,7 +3,9 @@
 namespace App\Filament\Resources\Employees\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class EmployeeForm
@@ -12,32 +14,52 @@ class EmployeeForm
     {
         return $schema
             ->components([
-                TextInput::make('country_id')
+                Select::make('country_id')
                     ->required()
-                    ->numeric(),
-                TextInput::make('state_id')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('country', 'name'),
+                Select::make('state_id')
                     ->required()
-                    ->numeric(),
-                TextInput::make('city_id')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('state', 'name'),
+                Select::make('city_id')
                     ->required()
-                    ->numeric(),
-                TextInput::make('department_id')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('city', 'name'),
+                Select::make('department_id')
                     ->required()
-                    ->numeric(),
-                TextInput::make('first_name')
-                    ->required(),
-                TextInput::make('last_name')
-                    ->required(),
-                TextInput::make('middle_name')
-                    ->required(),
-                TextInput::make('address')
-                    ->required(),
-                TextInput::make('zip_code')
-                    ->required(),
-                DatePicker::make('birth_date')
-                    ->required(),
-                DatePicker::make('hired_date')
-                    ->required(),
-            ]);
+                    ->searchable()
+                    ->preload()
+                    ->relationship('department', 'name'),
+                Section::make("User Name") // section used to group some input fields with each other
+                    ->description('add the user name details')
+                    ->schema([
+                        TextInput::make('first_name')
+                            ->required(),
+                        TextInput::make('last_name')
+                            ->required(),
+                        TextInput::make('middle_name')
+                            ->required(),
+                    ])->columns(3)->columnSpanFull(),
+                Section::make('User Address')
+                    ->description('add the user address')
+                    ->schema([
+                        TextInput::make('address')
+                            ->required(),
+                        TextInput::make('zip_code')
+                            ->required()
+                    ])->columnSpanFull()->columns(2),
+
+                Section::make('Dates')
+                    ->schema([
+                        DatePicker::make('birth_date')
+                            ->required(),
+                        DatePicker::make('hired_date')
+                            ->required()
+                    ])->columnSpanFull()->columns(2)
+            ])->columns(3);
     }
 }

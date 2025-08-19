@@ -21,13 +21,22 @@ class CountryResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    // filament will display the country by its name (title)
     protected static ?string $recordTitleAttribute = 'name';
 
+    // the name which will appear in the dashboard
     protected static ?string $navigationLabel = 'Country';
 
     protected static ?string $modelLabel = 'Employees Country';
-
+    
+    // will add this resource in group called system management
     protected static UnitEnum|string|null $navigationGroup = 'System Management';
+
+    // the order that display the models in the dashboard
+    protected static ?int $navigationSort = 1;
+
+    // the name of the URL
+    protected static ?string $slug = "Employees-Countries";
 
     public static function form(Schema $schema): Schema
     {

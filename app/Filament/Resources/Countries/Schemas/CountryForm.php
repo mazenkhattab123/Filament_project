@@ -12,6 +12,11 @@ class CountryForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->required()
+                    ->columnSpanFull(),
+                TextInput::make('code')
+                    ->required(),
+                TextInput::make('phoneCode')
                     ->required(),
             ]);
     }

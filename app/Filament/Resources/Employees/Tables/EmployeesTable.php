@@ -15,16 +15,17 @@ class EmployeesTable
     {
         return $table
             ->columns([
-                TextColumn::make('country_id')
+                TextColumn::make('country.name')
+                    ->label("Country")
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('state_id')
+                TextColumn::make('state.name')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('city_id')
+                TextColumn::make('city.name')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('department_id')
+                TextColumn::make('department.name')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('first_name')

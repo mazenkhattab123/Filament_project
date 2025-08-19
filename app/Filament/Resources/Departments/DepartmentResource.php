@@ -11,6 +11,7 @@ use App\Filament\Resources\Departments\Schemas\DepartmentInfolist;
 use App\Filament\Resources\Departments\Tables\DepartmentsTable;
 use App\Models\Department;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -23,6 +24,17 @@ class DepartmentResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    // the name which will appear in the dashboard
+    protected static ?string $navigationLabel = 'Department';
+
+    protected static ?string $modelLabel = 'Departments';
+
+    // the order that display the models in the dashboard
+    protected static ?int $navigationSort = 4;
+
+    // will add this resource in group called system management
+    protected static UnitEnum|string|null $navigationGroup = 'System Management';
 
     public static function form(Schema $schema): Schema
     {

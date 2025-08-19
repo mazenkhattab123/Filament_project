@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Cities\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -11,9 +12,9 @@ class CityForm
     {
         return $schema
             ->components([
-                TextInput::make('state_id')
+                Select::make('state_id')
                     ->required()
-                    ->numeric(),
+                    ->relationship('state', 'name'),
                 TextInput::make('name')
                     ->required(),
             ]);
